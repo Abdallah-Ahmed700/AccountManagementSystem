@@ -1,0 +1,77 @@
+1. Write a C# program that reads a list of integers from the user and throws an exception if any numbers are duplicates.
+
+static void Main(string[] args)
+{
+    List<int> numbers = new List<int>();
+
+    char askAddNumber;
+    bool repeatNumber = true; 
+    do
+    {
+        Console.Write("Enter Numper : ");
+        int num = Convert.ToInt32(Console.ReadLine());
+        for (int i = 0; i < numbers.Count; i++)  
+        {
+            if (numbers[i] == num)
+            {
+                Console.WriteLine("\n>>> The number exists. Enter another number. <<<\n");
+                repeatNumber = false;
+                break;
+            }
+        }
+
+        if (repeatNumber == true)
+        {
+            numbers.Add(num);
+            Console.WriteLine($"\n>>> Number Is Add {numbers[^1]} <<<\n");
+            Console.Write(">>> [");
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                Console.Write($" {numbers[i]} ");
+            }
+            Console.Write("] <<<\n");
+            numbers.TrimExcess();
+        }
+
+        
+        Console.Write("\nWould you like to enter another number  ? ( y  or  n ) : ");
+        askAddNumber = Convert.ToChar(Console.ReadLine().ToUpper());
+
+    } while (askAddNumber == 'Y');
+
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+2. Write a C# program to create a method that takes a string as input and throws an exception if the string does not contain vowels.
+
+ static void Check(string text)
+ {
+     string vowels = "aeiouAEIOU";
+     for (int i = 0; i < text.Length; i++)
+     {
+         if (vowels.Contains(text[i]))
+         {
+             return; 
+         }
+     }
+
+     throw new Exception("The string does not contain any vowels.");
+ }
+
+static void Main(string[] args)
+{
+    Console.WriteLine("Enter a string:");
+    string input = Console.ReadLine();
+
+    try
+    {
+        Check(input);
+        Console.WriteLine("The string contains vowels.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Exception: {ex.Message}");
+    }
+}
